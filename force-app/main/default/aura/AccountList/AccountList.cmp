@@ -1,0 +1,19 @@
+<aura:component controller="AccountsList">
+
+    <aura:attribute type="Account[]" name="acctList"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:attribute name="nome" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.fetchAccounts}"/>
+    
+    <div class="slds-p-horizontal--small">
+        <lightning:input label="Nome" value="{!v.nome}"/>
+        <br/>
+        <lightning:button label="Buscar" variant="brand" onclick="{!c.Buscar}" />
+    </div>
+    <lightning:datatable data="{! v.acctList }" 
+                         columns="{! v.mycolumns }" 
+                         keyField="id"
+                         hideCheckboxColumn="true"/>
+    
+</aura:component>

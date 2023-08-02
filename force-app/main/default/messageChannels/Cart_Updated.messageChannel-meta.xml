@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>CartUpdated</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Canal de mensagem para atualizar o carrinho</description>
+    <lightningMessageFields>
+        <fieldName>record</fieldName>
+        <description>Produto para adicionar ao carrinho</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

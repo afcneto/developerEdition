@@ -1,0 +1,42 @@
+<template>
+  <div class="slds-size_4-of-4">
+    <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+      <lightning-carousel scroll-duration={scrollDuration}>
+        <template if:true={banner}>
+          <template for:each={banner} for:item="ban">
+            <lightning-carousel-image
+              key = {ban.id}
+              src = {ban.src}
+              header = "First Card"
+              description = "First card description."
+              alternative-text = "First card accessible description."
+              href = {ban.href}>
+            </lightning-carousel-image>
+          </template>
+        </template>
+        <!--<lightning-carousel-image
+            src = {banner.src}
+            header = "First Card"
+            description = "First card description."
+            alternative-text = "First card accessible description."
+            href = {banner.href}>
+        </lightning-carousel-image>
+        <lightning-carousel-image
+            src = "https://www.vivo.com.br/content/dam/scene7/vivo-fibra-destrave-2104-desk-1920x703-person.jpg"
+            header = "Second Card"
+            description = "Second card description."
+            alternative-text = "Second card accessible description."
+            href = "https://www.vivo.com.br/para-voce/produtos-e-servicos/para-casa/internet?&id_origem_vivo=b2c_fixa_banner%20portal_novo_cliente_300mb_129">
+        </lightning-carousel-image>
+        <lightning-carousel-image
+            src = "https://www.vivo.com.br/content/dam/vivo-sites/vivo-com-br/homepage/imagens/hero/vivo-controle-homem-icones-novo-portfolio-2105-desk-1920x703.jpg"
+            header = "Third Card"
+            description = "Third card description."
+            alternative-text = "Third card accessible description."
+            href = "https://www.vivo.com.br/para-voce/produtos-e-servicos/para-o-celular/vivo-controle/planos-controle#Planos">
+        </lightning-carousel-image>-->
+        
+      </lightning-carousel>
+    </div>
+  </div>
+</template>

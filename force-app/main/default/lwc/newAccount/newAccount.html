@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Create Account" icon-name="standard:account">
+        <div class="slds-m-around_medium">
+            <lightning-record-form
+                object-api-name={accountObject}
+                fields={accountFields}
+                onsuccess={handleAccountCreated}
+                columns="2">
+            </lightning-record-form>
+            <template if:true={accList}>
+                <lightning-datatable 
+                    data={accList} 
+                    columns={columns} 
+                    key-field="Id"
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+            <template if:true={error}>
+                {error}
+            </template>
+        </div>
+        
+    </lightning-card>
+    
+</template>

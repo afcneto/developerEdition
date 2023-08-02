@@ -1,0 +1,12 @@
+.THIS .radioButtonCSS:focus-visible {
+    border: 2px solid blue;
+    outline: 2px solid black;
+    border-radius: 3px;
+}
+
+.THIS .goToBookIntegrado {
+    right: 16px;
+    position: absolute;
+    text-decoration: underline;
+    filter: contrast(50%);
+}

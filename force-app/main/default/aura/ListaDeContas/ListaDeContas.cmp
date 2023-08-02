@@ -1,0 +1,39 @@
+<aura:component controller="AccountsList"
+    implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+    access="global">
+
+    <aura:attribute type="Account[]" name="acctList" />
+    <aura:attribute type="List" name="mycolumns" />
+    <aura:attribute type="String" name="nome" />
+
+    <aura:attribute name="options" type="List" default="[
+    {'label': 'Sales', 'value': 'option1'},
+    {'label': 'Force', 'value': 'option2'}
+    ]" />
+    <aura:attribute name="value" type="String" default="option1" />
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <div class="slds-p-horizontal--small">
+        <lightning:input label="Nome" value="{!v.nome}" />
+        <lightning:button label="Buscar" variant="brand" onclick="{!c.buscar}" />
+        <lightning:button label="Sair" variant="brand" onclick="{!c.sair}" />
+    </div>
+    <lightning:datatable data="{! v.acctList }" columns="{! v.mycolumns }" keyField="id" hideCheckboxColumn="true" />
+
+
+
+    <lightning:radioGroup class="radioButtonCSS" name="radioGroup" label="Radio Group" options="{! v.options }"
+        value="{! v.value }" type="radio" />
+
+    <lightning:input class="goToBookIntegrado" name="input1" label="Enter some text" />
+
+    <div class="slds-form-element">
+        <label class="slds-form-element__label" for="text-input-id-51">
+            <abbr class="slds-required" title="required">* </abbr>Input Label</label>
+        <div class="slds-form-element__control">
+            <input type="text" id="text-input-id-51" placeholder="Placeholder text…" required="" class="radioButtonCSS slds-input" />
+        </div>
+    </div>
+
+</aura:component>

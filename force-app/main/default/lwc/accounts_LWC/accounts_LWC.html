@@ -1,0 +1,21 @@
+<template>  
+  <template if:true={accList}>
+    <lightning-input
+      label="Nome"
+      value={filters.postalCode}
+    ></lightning-input>
+    <lightning-button-icon
+      icon-name="utility:search"
+      variant="border-filled"
+      alternative-text="Botão com uma lupa"
+      class="slds-m-left_xx-small"
+      title="Pesquisar"
+      onclick={handleSearch}
+    ></lightning-button-icon>
+    <lightning-datatable data={accounts} columns={columns} key-field="Id">
+    </lightning-datatable>
+  </template>
+  <template if:true={error}>
+      {error}
+  </template>
+</template>
