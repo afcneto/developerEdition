@@ -1,30 +1,24 @@
 import { LightningElement, wire, track } from "lwc";
-import { subscribe, MessageContext } from 'lightning/messageService';
+import { subscribe, publish, MessageContext } from 'lightning/messageService';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import CART_UPDATED_CHANNEL from '@salesforce/messageChannel/Cart_Updated__c';
+import PRODUCTS_UPDATED_CHANNEL from '@salesforce/messageChannel/Products_Updated__c';
 import saveRecords from '@salesforce/apex/ProdutosController.atualizaEstoqueProduto';
-
-const colunas = [
-    {
-        label: 'Produto',
-        fieldName: 'nome'
-    },
-    {
-        label: 'Valor R$',
-        fieldName: 'preco'
-    },
-];
 
 export default class CarrinhoCompras extends LightningElement {
     adding = null;
-    colunas = colunas;
+    
     @track data = [];
-    @track records = [];
+    @track records = null;
     @track totalCart = 0;
+    @track emptyCart = true;
+    @track error;
 
     @wire(MessageContext)
     messageContext;
+
+    imagem = 'https://www.pngkit.com/png/detail/411-4110678_carrinho-de-compras-vazio-shopping-cart.png';
 
     cartToMessageChannel() {
         this.adding = subscribe(
@@ -35,38 +29,49 @@ export default class CarrinhoCompras extends LightningElement {
     }
 
     handleMessage(message) {
-        //alert('messagem: '+JSON.stringify(message));
+        if (this.records === null) this.records = [];
         this.records.push(message);
         this.data.push(message);
-        //alert('this.record: '+JSON.stringify(this.records));
-
         this.totalCart += parseFloat(message.preco);
+        this.emptyCart = false;
     }
 
     connectedCallback() {
         this.cartToMessageChannel();
     }
 
-    atualizaEstoque() {
-        //alert('this.record: '+JSON.stringify(this.records));
-        //saveRecords({records:this.records});
+    @wire(MessageContext)
+    messageContext2;
+    finalizaCompra() {
         saveRecords({ records: this.records })
             .then(result => {
-                //alert('result: '+result)    
-                this.records = [];
+                //alert('result: '+result)   
+                publish(this.messageContext2, PRODUCTS_UPDATED_CHANNEL, this.records); 
+                this.records = null;
+                this.emptyCart = true;
                 this.totalCart = 0;
-                const toastEvent = new ShowToastEvent({
-                    title: 'Success!',
-                    message: 'Compra realizada com sucesso',
-                    variant: 'success'
-                });
-                this.dispatchEvent(toastEvent);
-                this.frame();
+                this.toast('Success!', 'Compra realizada com sucesso', 'success');                
+                
             })
             .catch(error => {
                 this.error = error.message;
-                alert(this.error);
+                this.toast('Erro!', this.error, 'error');
             });
     }
 
+    limpaCarrinho() {
+        this.records = null;
+        this.emptyCart = true;
+        this.totalCart = 0;
+        this.toast('Success!', 'Seu carrinho está vazio!', 'success');
+    }
+
+    toast(title, message, variant) {
+        const toastEvent = new ShowToastEvent({
+            title: title,
+            message: message,
+            variant: variant
+        });
+        this.dispatchEvent(toastEvent);
+    }
 }

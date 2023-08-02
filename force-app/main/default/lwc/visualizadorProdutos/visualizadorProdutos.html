@@ -3,15 +3,6 @@
         <lightning-card title="Lista de Produtos" icon-name="standard:product_service_campaign">
             <div class="slds-box" style="overflow: auto; height:430px;">
                 <template if:true={produtosList}>
-                    <!--div class="slds-box">
-                        <lightning-datatable 
-                            data={produtosList.data} 
-                            columns={colunas} 
-                            key-field="id"
-                            onrowaction={handleRowAction}
-                            hide-checkbox-column>
-                        </lightning-datatable>
-                    </div-->
                     <lightning-layout multiple-rows>
                         <template for:each={produtosList.data} for:item="produto">
                             <lightning-layout-item size="12" small-device-size="6" medium-device-size="4" large-device-size="4" padding="around-small" key={produto.id}>

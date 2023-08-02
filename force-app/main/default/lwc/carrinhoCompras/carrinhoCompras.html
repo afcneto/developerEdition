@@ -18,41 +18,28 @@
                 </template>
             </div> 
         </template>
+        <template if:true={emptyCart}>
+            <div class="slds-box c-container">
+                <img src={imagem}/>
+            </div>
+        </template>
         <lightning-layout>
             <lightning-layout-item flexibility="auto">
-                <div class="custom-box slds-box slds-p-around_small slds-text-align_right">
-                    <b>Total: <lightning-formatted-number format-style="currency" value={totalCart}></lightning-formatted-number></b>
-                    <lightning-button variant="brand" label="Finalizar compra" title="Comprar" onclick={atualizaEstoque} class="slds-m-around_small"></lightning-button>                     
+                <div class="custom-box slds-box slds-m-around_xx-small slds-text-align_right">                    
+                    <div class="slds-m-around_small">
+                        <b style="font-size: 1.5rem;">Total: <lightning-formatted-number format-style="currency" value={totalCart}></lightning-formatted-number></b>
+                    </div>
+                    <div class="slds-grid slds-m-around_small">
+                        <div class="slds-col slds-size_1-of-2 slds-text-align_left">
+                            <lightning-button disabled={emptyCart} variant="base" label="Limpar carrinho" title="Limpar carrinho" onclick={limpaCarrinho} icon-name="utility:delete" class="slds-m-left_xx-small"></lightning-button>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-text-align_right">
+                            <lightning-button disabled={emptyCart} variant="brand" label="Finalizar compra" title="Comprar" onclick={finalizaCompra} icon-name="utility:cart" class="slds-m-left_xx-small"></lightning-button>                 
+                        </div>
+                    </div>
                 </div>
             </lightning-layout-item>                          
         </lightning-layout>
-        
-            <p>Confetti and Sweet alert demo using LWC component</p>
-          
-          
-            <canvas class="confettiCanvas" id="canvas" lwc:dom="manual"></canvas>
-                
-            <lightning-card title="Confetti">
-              <lightning-button
-                label="Basic Cannon"
-                onclick={basisCannon}
-                class="slds-m-left_x-small"
-              ></lightning-button>
-          
-          
-              <lightning-button
-                label="Random Cannon"
-                onclick={randomCannon}
-                class="slds-m-left_x-small"
-              ></lightning-button>
-          
-          
-              <lightning-button
-                label="Fire Work"
-                onclick={fireworks}
-                class="slds-m-left_x-small"
-              ></lightning-button>
-            </lightning-card>
         
     </lightning-card>
 </template>
