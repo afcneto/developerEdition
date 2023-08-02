@@ -74,12 +74,11 @@ export default class VisualizadorProdutos extends LightningElement {
         this.adding = subscribe(
             this.messageContext2,
             PRODUCTS_UPDATED_CHANNEL,
-            (message) => this.handleMessage(message)
+            (message) => this.handleMessage(message) 
         );
     }
 
     handleMessage(message) {
-        alert('msg: ' + JSON.stringify(message));
         if (message)
             refreshApex(this.produtosList);
     }
